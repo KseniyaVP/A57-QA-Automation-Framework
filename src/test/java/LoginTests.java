@@ -1,19 +1,21 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
-    @Test
+ /*   @Test
     public void loginEmptyEmailPassword() {
 
         provideEmail(" ");
         providePassword(" ");
         clickLoginBtn();
+        String url = "//https://qa.koel.app/";
         Assert.assertEquals(driver.getCurrentUrl(), url);
       //  driver.quit();
-    }
+    }*/
 @Test
     public void loginValidEmailPassword() throws InterruptedException {
 
@@ -29,7 +31,7 @@ public class LoginTests extends BaseTest {
     }
 
 
-    @Test
+ /*   @Test()
     public void loginInvalidEmailPassword() throws InterruptedException{
                     //Steps
         provideEmail("k.potsina@testpro.io");
@@ -37,19 +39,35 @@ public class LoginTests extends BaseTest {
         clickLoginBtn();
         Thread.sleep(2000);//Open browser
 
-
+        String url = "//https://qa.koel.app/";
         Assert.assertEquals(driver.getCurrentUrl(),url);
 
-    }
-@Test
+    }*/
+/*@Test
+
     public void loginValidEmailInvalidPassword() throws InterruptedException{
 
     provideEmail("kseniya.potsina@testpro.io");
     providePassword("testproA");
     clickLoginBtn();
     Thread.sleep(2000);//Open browser
+    String url = "//https://qa.koel.app/";
 
        Assert.assertEquals(driver.getCurrentUrl(),url);
+
+   }*/
+    //NegativeLoginTestData
+
+    @Test(dataProvider = "NegativeLoginTestData" , dataProviderClass = TestDataProvider.class)
+    public void negativeLoginTest(String email, String password) throws InterruptedException {
+        provideEmail(email);
+        providePassword(password);
+        clickLoginBtn();
+        Thread.sleep(2000);
+
+        String url = "//https://qa.koel.app/";
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+        System.out.println("Just Testing console");
 
     }
 
