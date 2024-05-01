@@ -1,25 +1,24 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.netty.util.Attribute;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
 public class BaseTest {
 
     public WebDriver driver;
-   // public String url="https://qa.koel.app/";
-    @DataProvider(name ="NegativeLoginTestData")
-    public Object[][] getDataFromDataProvider(){
-        return new Object[][]{
-                {"invalidEmail","invalid"},
-                {"k.potsina@testpro.io","testproA57*"},
-                {"kseniya.potsina@testpro.io","invalid"},
-                {" ", " "}
-        };
+
+    public void navigateToPage(String url){
+
+        driver.get(url);
     }
 
     @BeforeSuite
@@ -71,7 +70,7 @@ public void launchBrowser(String baseURL) {
     /*public void navigateToPage() {
         driver.get(url);
     }*/
-    public void navigateToPage(String url) {
-        driver.get(url);
+
+
+
     }
-}
