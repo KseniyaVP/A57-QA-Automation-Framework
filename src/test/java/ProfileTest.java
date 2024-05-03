@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,6 @@ public class ProfileTest extends BaseTest {
         provideEmail("kseniya.potsina@testpro.io");
         providePassword("testproA57*");
         clickLoginBtn();
-        Thread.sleep(2000);
         //click on avatar icon to navigate to profile
         clickOnAvatarIcon();
         // generate random name
@@ -35,7 +35,7 @@ public class ProfileTest extends BaseTest {
     }
 
     public void clickOnAvatarIcon() {
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
         avatarIcon.click();
     }
     public String generateRandomName(){
