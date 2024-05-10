@@ -4,6 +4,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
@@ -29,7 +31,17 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(avatarIcon.isDisplayed());
 
     }
+     ///login Valid email Test using the Page Object Model
+@Test
+    public void loginValidEmailValidPasswordTest(){
+    LoginPage loginPage = new LoginPage(driver);
+    HomePage homePage = new HomePage(driver);
 
+    loginPage.provideEmail("kseniya.potsina@testpro.io");
+    loginPage.providePassword("testproA57*");
+    loginPage.clickSubmit();
+    Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+}
 
  /*   @Test()
     public void loginInvalidEmailPassword() throws InterruptedException{
@@ -70,5 +82,6 @@ public class LoginTests extends BaseTest {
         System.out.println("Just Testing console");
 
     }
+
 
 }
