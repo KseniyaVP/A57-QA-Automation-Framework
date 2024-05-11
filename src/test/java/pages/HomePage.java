@@ -11,9 +11,9 @@ public class HomePage extends BasePage{
     }
     //Web Elements
 
-    By userAvatarIcon = By.cssSelector("img[class='avatar']");
-    By playlistElement = By.cssSelector("li.playlist:nth-child(6)");
-    By playlistInputField =By.cssSelector("[name='name']");
+    private By userAvatarIcon = By.cssSelector("img[class='avatar']");
+    private By playlistElement = By.cssSelector("li.playlist:nth-child(6)");
+    private By playlistInputField =By.cssSelector("[name='name']");
 
     By notification = By.cssSelector("div.success.show");
 
@@ -32,14 +32,5 @@ public class HomePage extends BasePage{
         findElement(playlistInputField).sendKeys(Keys.ENTER);}
 
     public String getRenamePlaylistSuccessMsg() {return findElement(notification).getText();}
-
-
-
-
-
-
-
-
-
 
 }

@@ -20,9 +20,6 @@ public class Homework22 extends BaseTest {
         homePage.enterNewPlaylistName(newPlaylistName);
 
         Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(), updatedPlaylistSuccessMsg);
-
     }
-
-
 
 }
