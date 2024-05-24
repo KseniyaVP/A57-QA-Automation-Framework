@@ -42,6 +42,17 @@ public class LoginTests extends BaseTest {
     loginPage.clickSubmit();
     Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 }
+@Test
+    public void loginValidEmailValidPasswordTestPOM()throws InterruptedException{
+    LoginPage loginPage = new LoginPage(driver);
+    HomePage homePage = new HomePage(driver);
+
+    loginPage.provideEmailToLogin("kseniya.potsina@testpro.io")
+             .providePasswordToLogin("testproA57*")
+             .clickSubmitBtn();
+    Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+
+    }
 
  /*   @Test()
     public void loginInvalidEmailPassword() throws InterruptedException{
