@@ -2,10 +2,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
+
+import static org.testng.Assert.assertTrue;
 
 public class Homework18 extends BaseTest {
 
- @Test
+ /*@Test
  public void playSong() throws InterruptedException {
      //navigate to page and log in with credentials
      provideEmail("kseniya.potsina@testpro.io");
@@ -32,5 +36,16 @@ public class Homework18 extends BaseTest {
  public void clickPlayBtn(){
      WebElement playBtn = driver.findElement(By.cssSelector("span[class='play']"));
      playBtn.click();
- }
+ }*/
+@Test
+    public void playSongs()  {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login();
+        homePage.clickPlayNextSongBtn();
+        homePage.clickPlayBtn();
+
+        Assert.assertTrue(homePage.isSongPlaying().isDisplayed());
+    }
 }

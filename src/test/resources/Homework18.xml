@@ -7,7 +7,7 @@
         <classes>
             <class name="Homework18">
                 <methods>
-                    <include name="playSong"/>
+                    <include name="playSongs"/>
                 </methods>
             </class>
         </classes>

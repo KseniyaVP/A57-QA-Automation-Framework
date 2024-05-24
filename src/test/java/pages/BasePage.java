@@ -15,9 +15,10 @@ public class BasePage {
     protected WebDriverWait wait;
     protected Actions actions;
 
+
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
     }
 
@@ -25,7 +26,10 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
   }
   public void doubleClick(By locator){
-      actions.doubleClick(findElement(locator)).perform();
+        actions.doubleClick(findElement(locator)).perform();
+  }
+  public void click (By locator) {
+       findElement(locator).click();
   }
 
 
