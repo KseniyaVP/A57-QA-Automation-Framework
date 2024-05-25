@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage{
     public HomePage(WebDriver givenDriver) {
@@ -43,5 +44,27 @@ public class HomePage extends BasePage{
     public WebElement isSongPlaying() {
         return findElement(soundBarVisualizer);
     }
+
+
+    @FindBy(xpath = "//section[@id='playlists']/ul/li[4]/a")
+    WebElement homework19Playlist;
+
+    @FindBy(css = "button[class='del btn-delete-playlist']")
+    WebElement deletePlaylistBtn;
+
+    @FindBy(css="div[class ='success show']")
+    WebElement notificationMsg;
+
+    public HomePage clickHomework19Playlist(){
+        homework19Playlist.click();
+        return this;
+    }
+    public HomePage clickDeletePlaylistBtn(){
+        deletePlaylistBtn.click();
+        return this;
+    }
+    public  String getDeletedPlaylistSuccessMsg(){
+        return notificationMsg.getText();
+        }
 
 }
