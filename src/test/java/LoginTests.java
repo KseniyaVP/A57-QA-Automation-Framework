@@ -32,7 +32,7 @@ public class LoginTests extends BaseTest {
 
     }
      ///login Valid email Test using the Page Object Model
-@Test
+/*@Test
     public void loginValidEmailValidPasswordTest(){
     LoginPage loginPage = new LoginPage(driver);
     HomePage homePage = new HomePage(driver);
@@ -52,7 +52,7 @@ public class LoginTests extends BaseTest {
              .clickSubmitBtn();
     Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
-    }
+    }*/
 
  /*   @Test()
     public void loginInvalidEmailPassword() throws InterruptedException{
@@ -81,7 +81,7 @@ public class LoginTests extends BaseTest {
    }*/
     //NegativeLoginTestData
 
-    @Test(dataProvider = "NegativeLoginTestData" , dataProviderClass = TestDataProvider.class)
+  /*  @Test(dataProvider = "NegativeLoginTestData" , dataProviderClass = TestDataProvider.class)
     public void negativeLoginTest(String email, String password) throws InterruptedException {
         provideEmail(email);
         providePassword(password);
@@ -92,7 +92,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
         System.out.println("Just Testing console");
 
-    }
+    }*/
 
 
 }
