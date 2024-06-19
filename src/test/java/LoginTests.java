@@ -19,7 +19,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
       //  driver.quit();
     }*/
-@Test
+/*@Test
     public void loginValidEmailPassword() throws InterruptedException {
 
         provideEmail("kseniya.potsina@testpro.io");
@@ -30,12 +30,14 @@ public class LoginTests extends BaseTest {
         WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
         Assert.assertTrue(avatarIcon.isDisplayed());
 
-    }
+    }*/
      ///login Valid email Test using the Page Object Model
 @Test
     public void loginValidEmailValidPasswordTest(){
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
+    /*LoginPage loginPage = new LoginPage(driver);
+    HomePage homePage = new HomePage(driver);*/
+    LoginPage loginPage = new LoginPage(getDriver());
+    HomePage homePage = new HomePage(getDriver());
 
     loginPage.provideEmail("kseniya.potsina@testpro.io");
     loginPage.providePassword("testproA57*");
@@ -44,8 +46,11 @@ public class LoginTests extends BaseTest {
 }
 @Test
     public void loginValidEmailValidPasswordTestPOM()throws InterruptedException{
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
+     /*LoginPage loginPage = new LoginPage(driver);
+    HomePage homePage = new HomePage(driver);*/
+    LoginPage loginPage = new LoginPage(getDriver());
+    HomePage homePage = new HomePage(getDriver());
+
 
     loginPage.provideEmailToLogin("kseniya.potsina@testpro.io")
              .providePasswordToLogin("testproA57*")
@@ -81,7 +86,7 @@ public class LoginTests extends BaseTest {
    }*/
     //NegativeLoginTestData
 
-    @Test(dataProvider = "NegativeLoginTestData" , dataProviderClass = TestDataProvider.class)
+    /*@Test(dataProvider = "NegativeLoginTestData" , dataProviderClass = TestDataProvider.class)
     public void negativeLoginTest(String email, String password) throws InterruptedException {
         provideEmail(email);
         providePassword(password);
@@ -92,7 +97,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
         System.out.println("Just Testing console");
 
-    }
+    }*/
 
 
 }
