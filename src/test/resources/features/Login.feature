@@ -1,0 +1,10 @@
+
+
+  Feature: Login feature
+
+    Scenario:
+      Given I open Login page
+      When I enter email "kseniya.potsina@testpro.io"
+      And I enter password "testproA57*"
+      And I submit
+      Then I am logged in
