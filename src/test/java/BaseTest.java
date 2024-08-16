@@ -11,89 +11,110 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeMethod;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 
 
 public class BaseTest {
 
+    public ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     public static WebDriver driver;
 
     public WebDriverWait wait;
 
-     public Actions actions;
+    public Actions actions;
+
+    public void navigateToPage(String url){
+        driver.get(url);
+    }
 
 
     @BeforeSuite
     static void setupClass() {
-        //WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
-    }
-  /*@BeforeMethod
-    public void launchBrowser(){
-       ChromeOptions  options = new ChromeOptions();
-       options.addArguments("--remote-allow-origins=*");
-       driver = new ChromeDriver(options);
-       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-       driver.manage().window().maximize();
-       navigateToPage();
-    }*/
-@BeforeMethod
-@Parameters({"BaseURL"})
-public void launchBrowser (String baseURL) throws MalformedURLException {
-    //ChromeOptions options = new ChromeOptions();
-    //options.addArguments("--remote-allow-origins=*");
-    //driver = new ChromeDriver(options);
-    //driver = new FirefoxDriver();
-    driver = pickBrowser(System.getProperty("browser"));
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    driver.manage().window().maximize();
-    wait =new WebDriverWait(driver, Duration.ofSeconds(10));
-    navigateToPage(baseURL);}
-
-@AfterMethod
-    public void closeBrowser(){
-    driver.quit();
+        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.firefoxdriver().setup();
+        // WebDriverManager.safaridriver().setup();
     }
 
-    public static WebDriver pickBrowser ( String browser) throws MalformedURLException{
+    /*@BeforeMethod
+      public void launchBrowser(){
+         ChromeOptions  options = new ChromeOptions();
+         options.addArguments("--remote-allow-origins=*");
+         driver = new ChromeDriver(options);
+         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+         driver.manage().window().maximize();
+         navigateToPage();
+      }*/
+    @BeforeMethod
+
+    @Parameters({"BaseURL"})
+
+    public void launchBrowser(String baseURL) throws MalformedURLException {
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--remote-allow-origins=*");
+        //driver = new ChromeDriver(options);
+        //driver = new FirefoxDriver();
+
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(driver);
+
+        driver = pickBrowser(System.getProperty("browser"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        actions = new Actions(driver);
+
+        navigateToPage(baseURL);
+    }
+
+
+
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://192.168.0.17:4444";
-       switch (browser){
+        String gridURL = "http://192.168.0.17:4444/";
+        switch (browser) {
            case "firefox":
-               WebDriverManager.firefoxdriver().setup();
-              return driver = new FirefoxDriver();
-           case "MicrosoftEdge":
-               WebDriverManager.edgedriver().setup();
-               EdgeOptions edgeOptions = new EdgeOptions();
-               edgeOptions.addArguments("--remote-allow-origins=*");
-               return driver = new EdgeDriver();
+                WebDriverManager.firefoxdriver().setup();
+                return driver = new FirefoxDriver();
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--remote-allow-origins=*");
+                return driver = new EdgeDriver();
 
-           /////Grid cases////////
-           case"grid-edge":
-               caps.setCapability("browserName", "MicrosoftEdge");
-               return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-           case"grid-firefox":
-               caps.setCapability("browserName", "firefox");
-               return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-           case"grid-chrome":
-               caps.setCapability("browserName", "chrome");
-               return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            /////Grid cases////////
+            case "grid-edge":
+                caps.setCapability("browserName", "MicrosoftEdge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-firefox":
+                caps.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-chrome":
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
-           default:
-               WebDriverManager.chromedriver().setup();
-               ChromeOptions chromeOptions = new ChromeOptions();
-               chromeOptions.addArguments("--remote-allow-origins=*");
-               return driver = new ChromeDriver(chromeOptions);
-       }
+
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(chromeOptions);
+        }
     }
+
+
 
     ////////////old methods//////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,7 +138,15 @@ public void launchBrowser (String baseURL) throws MalformedURLException {
         passwordField.sendKeys(password);
     }
 
-    public void navigateToPage(String url) {
-        driver.get(url);}
 
+    @AfterMethod
+   /*public void closeBrowser() {
+        driver.quit();
+    }*/
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
     }
+}
+
+

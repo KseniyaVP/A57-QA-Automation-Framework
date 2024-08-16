@@ -7,7 +7,7 @@ import pages.LoginPage;
 
 import static org.testng.Assert.assertTrue;
 
-public class Homework18 extends BaseTest {
+public class AllSongsTest extends BaseTest {
 
  /*@Test
  public void playSong() throws InterruptedException {
@@ -38,7 +38,7 @@ public class Homework18 extends BaseTest {
      playBtn.click();
  }*/
 @Test
-    public void playSongs()  {
+    public void playSongs()  throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
@@ -46,6 +46,8 @@ public class Homework18 extends BaseTest {
         homePage.clickPlayNextSongBtn();
         homePage.clickPlayBtn();
 
-        Assert.assertTrue(homePage.isSongPlaying().isDisplayed());
-    }
+        Assert.assertTrue(homePage.isSongPlaying().isDisplayed());}
+
+
+
 }

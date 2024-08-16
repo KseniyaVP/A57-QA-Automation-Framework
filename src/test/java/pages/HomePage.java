@@ -15,8 +15,8 @@ public class HomePage extends BasePage{
     private By userAvatarIcon = By.cssSelector("img[class='avatar']");
     private By playlistElement = By.cssSelector("li.playlist:nth-child(6)");
     private By playlistInputField =By.cssSelector("[name='name']");
-    private By playNextSongBtn = By.cssSelector("i[data-testid='play-next-btn']");
-    private By playBtn =By.cssSelector("span[class='play']");
+    private By playNextSongBtn = By.xpath("//*[@id=\"mainFooter\"]/div[1]/i[2]");
+    private By playBtn =By.xpath("//*[@id=\"mainFooter\"]/div[1]/span/span[2]");
     By soundBarVisualizer = By.cssSelector("img[alt='Sound bars']");
 
     By notification = By.cssSelector("div.success.show");

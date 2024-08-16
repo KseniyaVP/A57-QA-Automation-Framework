@@ -9,26 +9,26 @@ import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
- /*   @Test
+   @Test
     public void loginEmptyEmailPassword() {
+       String url = "https://qa.koel.app/";
+       LoginPage loginPage = new LoginPage(driver);
 
-        provideEmail(" ");
-        providePassword(" ");
-        clickLoginBtn();
-        String url = "//https://qa.koel.app/";
+        loginPage.provideEmail(" ");
+        loginPage.providePassword(" ");
+        loginPage.clickSubmit();
+
         Assert.assertEquals(driver.getCurrentUrl(), url);
-      //  driver.quit();
-    }*/
+       driver.quit();
+    }
 @Test
     public void loginValidEmailPassword() throws InterruptedException {
+       LoginPage loginPage = new LoginPage(driver);
+       HomePage homePage = new HomePage(driver);
 
-        provideEmail("kseniya.potsina@testpro.io");
-        providePassword("testproA57*");
-        clickLoginBtn();
+        loginPage.login();
 
-
-        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
     }
      ///login Valid email Test using the Page Object Model
